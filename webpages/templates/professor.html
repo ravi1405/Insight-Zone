@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block username %}
+  {{ user.get_username }}    
+{% endblock %}
+
+{% block body %}
+<section class="section" id="men">
+  <a href='/index'><i class='fa fa-arrow-left' style='font-size:24px'></i></a>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="card">    
+      <div class="mt-3">
+        <h2 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h2>
+      </div>
+      <div class="mt-2 mb-3">
+        <p class="profile-info">Username: {{ user.get_username }}</p>    
+        <!-- <p class="profile-info">Gender: {{ user.profile.gender }}</p> -->
+        <p class="profile-info">College: {{ user.profile.College.name }}</p>
+        <p class="profile-info">Semester: {{ user.profile.Semester.sem_id }}</p>
+        <p class="profile-info">Role: {{ user.profile.usertype }}</p>
+        <!-- <p>Average Rating: {{ average_rating|default:"Not rated"|floatformat:1 }}</p> -->
+      </div>        
+      <div class="profile-actions">
+        <a href="{{ pdf_file.file.url }}">{{ pdf_file.name }}</a>
+      </div>
+      <!-- <div class="rating-section too">
+        <h2 class="mt-4">Rate {{ user.first_name }}</h2>
+        <form method="POST" class="rating-form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-dark mb-3">Submit</button>
+        </form>
+      </div> -->
+    </div>
+  </form>
+  <div class="me">
+    <div class="mt-3 mb-3">
+      <h2 class="profile-name">{{ user.first_name }}'s Notes</h2>
+    </div>
+    <div class='row'>
+      <table class="table table-striped cry">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Description</th>
+            <th scope="col">PDF</th>
+            <th scope="col">Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for note in notes %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ note.title }}</td>
+            <td>{{ note.desc }}</td>
+            <td>{{ note.pdf }}</td>
+            <th scope="col"><a href="/downloadnote?id={{ note.id }}"><i class='fa fa-download' style='font-size:24px'></i></a></th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

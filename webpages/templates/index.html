@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block body %}
+    <!-- ***** Main Banner Area Start ***** -->
+        <div class="me">
+            <table class="mt-3 mb-3">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="me">
+                                <div class="dd col-md-12">                           
+                                    <li class="scroll-to-section"><a href="#men">Top Rated Students</a></li>
+                                </div>
+                            </div>                
+                        </th>
+                        <th scope="col">
+                            <div class="me">
+                                <div class="dd col-md-12">
+                                    <li class="scroll-to-section"><a href="#women">Top Rated Professors</a></li>
+                                </div>
+                            </div>                
+                        </th>
+                        <th scope="col">
+                            <div class="me">
+                                <div class="dd col-md-12">
+                                    <li class="scroll-to-section"><a href="#explore">Explore More</a></li>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    <div class="main-banner" id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <div class="thumb">
+                            <div class="inner-content">
+                                <div class="us">
+                                    <h4>We Are Insight Zone</h4>
+                                    <span>Simple, Easy &amp; Dependable</span>
+                                </div>
+                            </div>
+                            <img src="{% static 'assets/images/left-banner-image.jpg'%}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <div class="we">
+                                                <h4>Colleges</h4>
+                                                <span>Notes from top colleges around the globe</span>
+                                            </div>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Colleges</h4>
+                                                <p>Click below to find notes from your dream college</p>
+                                                <div class="main-border-button">
+                                                    <a href="/colleges">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="{% static 'assets/images/baner-right-image-01.jpg'%}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <div class="we">
+                                                <h4>Student's Notes</h4>
+                                                <span>Best notes from the top ranked students</span>
+                                            </div>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Student's Notes</h4>
+                                                <p>Click below to find the best notes from students like you</p>
+                                                <div class="main-border-button">
+                                                    <a href="notes?list=st">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="{% static 'assets/images/baner-right-image-02.jpg'%}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <div class="we">
+                                                <h4>Professor's Notes</h4>
+                                                <span>Notes from best professors arounf the globe.</span>
+                                            </div>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Professor's Notes</h4>
+                                                <p>Find notes of your favourite professor here</p>
+                                                <div class="main-border-button">
+                                                    <a href="/notes?list=pf">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="{% static 'assets/images/baner-right-image-03.jpg'%}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <div class="we">
+                                                <h4>Support Us</h4>
+                                                <span>Tell us about problems you face and help us improve</span>
+                                            </div>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4>Support Us</h4>
+                                                <p>Provide us feedback and help us improve and provide you the best experience</p>
+                                                <div class="main-border-button">
+                                                    <a href="/future">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="{% static 'assets/images/baner-right-image-04.jpg'%}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+
+    <!-- ***** Men Area Starts ***** -->
+    <section class="section" id="men">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>Top Rated Student's</h2>
+                        <span>Here' s a small list of best student's with great notes.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="men-item-carousel"> 
+                        <div class="owl-men-item owl-carousel">                            
+                            {% for student in students %}
+                            <div class="item item_student">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a href="{% url 'webpages:student' %}?student_id={{student.id}}"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="{% url 'webpages:single-product' %}"><i class="fa fa-star"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img src="{% static 'assets/images/men-03.jpg'%}" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <h4>{{ student.first_name }} {{student.last_name}}</h4>
+                                    <!-- <span>$150.00</span> -->
+                                    <ul class="stars">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Men Area Ends ***** -->
+
+    <!-- ***** Women Area Starts ***** -->
+    <section class="section" id="women">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>Top Rated Professor's</h2>
+                        <span>Top rated professors gives the top rated notes.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="women-item-carousel">
+                        <div class="owl-women-item owl-carousel">                            
+                            {% for professor in professors %}
+                            <div class="item item_student">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a href="{% url 'webpages:professor' %}?professor_id={{professor.id}}"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="{% url 'webpages:single-product' %}"><i class="fa fa-star"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img src="{% static 'assets/images/men-03.jpg'%}" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <h4>{{ professor.first_name }} {{professor.last_name}}</h4>
+                                    <!-- <span>$150.00</span> -->
+                                    <ul class="stars">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Women Area Ends ***** -->
+
+    <!-- ***** Kids Area Starts ***** -->
+    <!-- ***** Kids Area Ends ***** -->
+
+    <!-- ***** Explore Area Starts ***** -->
+    <section class="section" id="explore">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <h2>Why choose Insight Zone?</h2>
+                        <span>One of the primary reasons to choose Insight Zone is the extensive and varied collection of study materials available at your fingertips. Our platform boasts a vast repository of notes covering a wide range of subjects and topics. Whether you're studying mathematics, literature, science, or humanities, Insight Zone provides a treasure trove of resources to enhance your learning journey. With notes contributed by students worldwide, you'll find a wealth of study materials tailored to your specific needs, ensuring that you can find the information you require to excel academically.</span>
+                        <div class="quote">
+                            <i class="fa fa-quote-left"></i><p>Education is not just about learning facts, but more importantly, it is about nurturing the thirst for knowledge and fostering critical thinking.</p>
+                        </div>
+                        <p>Insight Zone isn't just about receiving knowledge; it's also about giving back and making an impact. By choosing Insight Zone, you have the opportunity to contribute your own expertise and study materials to the community. </p>
+                        <div class="main-border-button">
+                            <a href="products.html">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="leather">
+                                    <h4>Best Notes</h4>
+                                    <span>Latest Collection</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="first-image">
+                                    <img src="{% static 'assets/images/explore-image-01.jpg'%}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="second-image">
+                                    <img src="{% static 'assets/images/explore-image-02.jpg'%}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="types">
+                                    <h4>Notes around the Glob</h4>
+                                    <span>Over 1500 notes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Explore Area Ends ***** -->
+{% endblock body %}

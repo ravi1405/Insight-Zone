@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <title>{% block title %}{% endblock %} Insight Zone</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-hexashop.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl-carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/upload.css' %}">
+</head>
+
+<body>
+    <header class="header-area header-sticky background-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="{% url 'webpages:index' %}" class="logo">
+                            <img src="{% static 'assets/images/logo.png' %}">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="{% url 'webpages:index' %}">Home</a></li>
+                            <li><a href="{% url 'webpages:notes' %}">Notes</a></li>
+                            <li><a href="{% url 'webpages:colleges' %}">Colleges</a></li>
+                            {% if user.is_authenticated %}
+                                <li class="submenu">
+                                    <a href="javascript:;">{{ request.user.get_username }}</a>
+                                    <ul>
+                                        <li><a href="{% url 'webpages:profile' %}">Profile</a></li>
+                                        <li><a href="/logout">Log out</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li><a href="{% url 'webpages:login' %}">Log in</a></li>
+                                <li><a href="{% url 'webpages:register' %}">Register</a></li>
+                            {% endif %}
+                        </ul>
+                        <a class="menu-trigger">
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    {% block body %}{% endblock %}
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="first-item">
+                        <div class="logo">
+                            <img src="{% static 'assets/images/white-logo.png' %}" alt="hexashop ecommerce templatemo">
+                        </div>
+                        <ul>
+                            <li><a href="#">SSIT college</a></li>
+                            <li><a href="#">insightzone@help.com</a></li>
+                            <li><a href="#">+91 00000 00005</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="/notes?list=st">Student's Note</a></li>
+                        <li><a href="/notes?list=pf">Professor's Note</a></li>
+                        <li><a href="{% url 'webpages:colleges' %}">Colleges</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="{% url 'webpages:index' %}">Homepage</a></li>
+                        <li><a href="{% url 'webpages:about' %}">About Us</a></li>
+                        <!-- <li><a href="{% url 'webpages:contact' %}">Contact Us</a></li> -->
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="under-footer">
+                        <p>
+                            Copyright © 2023 Insight Zone Co., Ltd.
+                            All Rights Reserved.
+                            <br>
+                            Designed and Managed by Insight Zone Team
+                        </p>
+                        <ul>
+                            <li><a href="{% url 'webpages:future' %}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{% url 'webpages:future' %}"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- jQuery -->
+    <script src="{% static 'assets/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/js/popper.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/accordions.js' %}"></script>
+    <script src="{% static 'assets/js/datepicker.js' %}"></script>
+    <script src="{% static 'assets/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'assets/js/imgfix.min.js' %}"></script>
+    <script src="{% static 'assets/js/slick.js' %}"></script>
+    <script src="{% static 'assets/js/lightbox.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <!-- Global Init -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+</html>

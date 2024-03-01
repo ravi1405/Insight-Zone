@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block body %}
+
+<section class="section" id="men">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="card">    
+      <div class="mt-3">
+        <h2 class="profile-name">{{ College.name }}</h2>
+      </div>
+      <div class="mt-2 mb-3">
+        <p class="profile-info">Role : {{ College.address }}</p>
+      </div>
+    </div>
+  </form>
+</section>
+
+    
+{% endblock body %}

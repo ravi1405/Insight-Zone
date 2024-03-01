@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block body %}
+
+<section class="section" id="men">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="card">    
+      <div class="mt-3">
+        <h2 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h2>
+      </div>
+      <div class="mt-2 mb-3">
+        <p class="profile-info">Username : {{ user.get_username }}</p>
+        <p class="profile-info">Email : {{ user.email }}</p>    
+        <p class="profile-info">College : {{ user.profile.College.name }}</p>
+        <p class="profile-info">Semester : {{ user.profile.Semester.sem_id }}</p>
+        <p class="profile-info">Role : {{ user.profile.usertype }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card mt-3">
+            <div class="mt-3 mb-3">
+              <h2 class="profile-name">College Info</h2>
+            </div>    
+            <div class="col-md-12">
+              <div class="col-12 mb-2">
+                  <div class="form-outline flex-fill">
+                    <select class="form-control" name="college">
+                    <label for="exampleFormControlSelect1">College</label>
+                      <option>Select your College</option>
+                          {% for college in colleges %}
+                            <option value="{{college.id}}" {% if college.id == user.profile.College.id %}selected{% endif %}>{{college.name}}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+              </div>      
+              <div class="col-12">   
+                <div class="form-outline flex-fill">
+                  <select class="form-control" name="semester">
+                    <option>Select your Semester</option>
+                      {% for semester in semesters %}
+                        <option value="{{semester.id}}" {% if semester.id == user.profile.Semester.id %}selected{% endif %}>{{semester.sem_id}}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <button class="btn btn-dark mb-3 w-100" type="submit" >Update</button>
+            </div>        
+        </div>
+      </div>
+      <!-- <div class="col-md-4">
+        <div class="card mt-3">
+            <div class="mt-3 mb-3">
+              <h2 class="profile-name">College Info</h2>
+            </div>    
+            <div class="col-md-12">
+              <div class="col-12 mb-2">
+                  <div class="form-outline flex-fill">
+                    <select class="form-control" name="college">
+                    <label for="exampleFormControlSelect1">College</label>
+                      <option>Select your College</option>
+                          {% for college in colleges %}
+                            <option value="{{college.id}}" {% if college.id == user.profile.College.id %}selected{% endif %}>{{college.name}}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+              </div>      
+              <div class="col-12">   
+                <div class="form-outline flex-fill">
+                  <select class="form-control" name="semester">
+                    <option>Select your Semester</option>
+                      {% for semester in semesters %}
+                        <option value="{{semester.id}}" {% if semester.id == user.profile.Semester.id %}selected{% endif %}>{{semester.sem_id}}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <button class="btn btn-dark mb-3 w-100" type="submit" >Update</button>
+            </div>        
+        </div>
+      </div> -->
+    </div>
+  </form>
+</section>
+
+    
+{% endblock body %}

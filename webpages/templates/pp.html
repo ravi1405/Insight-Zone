@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block body %}
+
+<section class="section" id="men">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="card">    
+      <div class="mt-3">
+        <h2 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h2>
+      </div>
+      <div class="mt-2 mb-3">
+        <p class="profile-info">Username : {{ user.get_username  }}</p>    
+        <!-- <p class="profile-info">Gender : {{ user.profile.gender }}</p> -->
+        <p class="profile-info">College : {{ user.profile.College.name }}</p>
+        <p class="profile-info">Semester : {{ user.profile.Semester.sem_id }}</p>
+        <p class="profile-info">Role : {{ user.profile.usertype }}</p>
+      </div>
+        <div class="profile-actions">
+          <a href="{{ pdf_file.file.url }}">{{ pdf_file.name }}</a>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="me">
+    <div class="mt-3 mb-3">
+        <h2 class="profile-name">{{ user.first_name }}'s Notes</h2>
+    </div>
+    <div class='row'>
+      <table class="table table-striped cry" >
+        <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Description</th>
+              <th scope="col">PDF</th>
+              <th scope="col">Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for note in notes %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{note.title}}</td>
+                    <td>{{note.desc}} </td>
+                    <td>{{note.pdf}} </td>
+                    <th scope="col"><a href="/downloadnote?id={{note.id}}"><i class='fa fa-download' style='font-size:24px'></i></a></th>
+                  </tr>
+          {% endfor %}
+          <script src="{% static 'assets/js/a3.js' %}"></script>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+    
+{% endblock body %}

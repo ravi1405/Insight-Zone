@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block body %}
+
+<div class='container'>
+    <div class="too">
+        <div class="row mt-3 mb-3">
+            <div class="col-md-3">
+                <span><a href="/notes?list=cr">Add Notes</a></span>
+            </div>
+            <div class="col-md-3">
+                {% if query == 'my'%}
+                    <span><a href="/notes?list=my" style="color:blueviolet;">My Notes</a></span>
+                {% else %}
+                    <span><a href="/notes?list=my">My Notes</a></span>
+                {% endif%}
+            </div>
+            <div class="col-md-3">
+                {% if query == 'st'%}
+                    <span><a href="/notes?list=st" style="color:blueviolet;">Student's Notes</a></span>
+                {% else %}
+                    <span><a href="/notes?list=st">Student's Notes</a></span>
+                {% endif%}
+            </div>
+            <div class="col-md-3">
+                {% if query == 'pf'%}
+                    <span><a href="/notes?list=pf" style="color:blueviolet;">Professor's Notes</a></span>
+                {% else %}
+                    <span><a href="/notes?list=pf">Professor's Notes</a></span>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}                    
+        <div class="input-group col-12 mb-3">
+            <input type="text" class="form-control er col-9" placeholder="Search Notes Here" aria-label="Search Notes Here" aria-describedby="basic-addon2" name="search" value="{{search_term}}">
+            <div class="input-group-append col-3">
+                <input class="btn re" type="submit" value="Search"/>
+            </div>
+        </div>
+    </form>
+    <div class='row'>
+        <table class="table table-striped cry" >
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Description</th>
+                <th scope="col">PDF</th>
+                {% if query == 'my'%}
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                {% endif %}
+                {% if query == 'st' or query == 'pf' %}
+                    <th scope="col">Download</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for note in notes %}
+                <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{note.title}}</td>
+                    <td>{{note.desc}} </td>
+                    <td>{{note.pdf}} </td>
+                    {% if query == 'my' %}
+                        <th scope="col"><a href='/save-note?id={{note.id}}'><i class='fa fa-edit' style='font-size:24px'></i></a></th>
+                        <th scope="col">
+                            <form id="delete-form-{{note.id}}" method="post" action="/delete-note">
+                                {% csrf_token %}
+                                <input type="hidden" name="note-id" id="note-id" value={{note.id}} /> 
+                                <a onclick="confirmDelete({{note.id}})"><i class='fa fa-remove' style='font-size:24px'></i></a>
+                          </form>
+
+                        </th>
+                        
+                    {% endif %}
+                    {% if query == 'st' or query == 'pf'%}
+                        <th scope="col"><a href="/downloadnote?id={{note.id}}"><i class='fa fa-download' style='font-size:24px'></i></a></th>    
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            <script src="{% static 'assets/js/a3.js' %}"></script>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock body %}
+  

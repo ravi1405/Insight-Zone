@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block body %}
+
+<div class='container'>
+    <form method="POST">
+        {% csrf_token %}                    
+        <div class="input-group col-12 mb-3">
+            <input type="text" class="form-control er col-9" placeholder="Search College Here" aria-label="Search College Here" aria-describedby="basic-addon2" name="search" value="{{search_term}}">
+            <div class="input-group-append col-3">
+                <input class="btn re" type="submit" value="Search"/>
+            </div>
+        </div>
+    </form>
+    <div class='row'>
+        <table class="table table-striped cry" >
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">College Name</th>
+                <th scope="col">Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for college in colleges %}
+                <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{college.name}}</td>
+                    <td>{{college.address}} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock body %}
+  

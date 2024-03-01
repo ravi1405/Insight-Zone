@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block body %}
+
+<div class="container">
+  <div class="too">
+    <div class="row mt-3 mb-3">
+      <div class="col-md-3">
+        <span><a href="/notes?list=cr" style="color: blueviolet;">Add Notes</a></span>
+      </div>
+      <div class="col-md-3">
+        {% if query == 'my' %}
+          <span><a href="/notes?list=my" style="color: blueviolet;">My Notes</a></span>
+        {% else %}
+          <span><a href="/notes?list=my">My Notes</a></span>
+        {% endif %}
+      </div>
+      <div class="col-md-3">
+        {% if query == 'st' %}
+          <span><a href="/notes?list=st" style="color: blueviolet;">Student's Notes</a></span>
+        {% else %}
+          <span><a href="/notes?list=st">Student's Notes</a></span>
+        {% endif %}
+      </div>
+      <div class="col-md-3">
+        {% if query == 'pf' %}
+          <span><a href="/notes?list=pf" style="color: blueviolet;">Professor's Notes</a></span>
+        {% else %}
+          <span><a href="/notes?list=pf">Professor's Notes</a></span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <form id="save-form" method="post" action="/save-note" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="me">
+      <div class="cry">
+          <div class="row me">
+            <div class="me col-md-9">
+              {% if note %}
+                <h1>Edit Note</h1>
+              {% else %}
+                <h1>Add Note</h1>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row me ">
+            <div class="me col-md-9">
+              {% if error_message %}
+                <div class="alert alert-danger">{{ error_message }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row me ">
+            <div class="me col-md-9">
+              <input class="form-control mb-3" type="text" id="title" name="title" placeholder="Subject" {% if note %}value="{{ note.title }}"{% endif %} required>
+            </div>
+          </div>
+          <div class="row me ">
+            <div class="me col-md-9">
+              <input class="form-control mb-3" type="text" id="desc" name="desc" placeholder="Note Description" {% if note %}value="{{ note.desc }}"{% endif %} required>
+            </div>
+          </div>
+          <div class="row me ">
+            <div class="me col-md-9">
+              <div class="custom-file mb-3">
+                <input class="custom-file-input" type="file" id="savenote" name="savenote" accept=".doc, .docx, .pdf, .txt" required>
+                <label class="custom-file-label" for="savenote" id="file-label">No file chosen</label>
+              </div>
+              {% if note and note.pdf %}
+                <script>
+                  document.getElementById('file-label').innerText = "{{ note.pdf.name }}";
+                </script>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="me col-md-7">
+              <input type="hidden" id="note-id" name="note-id" value="{{ note.id }}">
+              <button class="btn btn-dark me mb-3" type="submit">Save</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const fileInput = document.getElementById('savenote');
+  const fileLabel = document.getElementById('file-label');
+
+  fileInput.addEventListener('change', function() {
+    fileLabel.innerText = this.files[0].name;
+  });
+});
+</script>
+<script src="{% static 'assets/js/a3.js' %}"></script>
+
+{% endblock body %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block username %}
+  {{ user.get_username }}    
+{% endblock %}
+
+{% block body %}
+<section class="section" id="rate-user">
+  <a href='/index'><i class='fa fa-arrow-left' style='font-size:24px'></i></a>
+  <h2 class="mt-3">{{ rated_user.first_name }} {{ rated_user.last_name }}</h2>
+  <p class="profile-info">Username: {{ rated_user.get_username }}</p>
+
+  <div class="card">
+    <h4>Rate {{ rated_user.first_name }}</h4>
+    <form method="POST" action="{% url 'rate_user' rated_user_id=rated_user.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Rate</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h4>{{ rated_user.first_name }}'s Ratings</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Rater</th>
+          <th scope="col">Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rating in ratings_received %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ rating.rater.username }}</td>
+          <td>{{ rating.rating_value }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3">No ratings yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
